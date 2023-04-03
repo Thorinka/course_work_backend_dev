@@ -54,17 +54,31 @@ class Operation:
 
     def cypher_card_number(self):
         card_number_list = self.get_from_where().split(" ")
-        unformatted_card_number = card_number_list[1]
-        new_unformatted_card_number = [unformatted_card_number[0:6], unformatted_card_number[6:12], unformatted_card_number[12:]]
-        formatting_list = [new_unformatted_card_number[0]]
-        for digit in new_unformatted_card_number[1]:
+        raw_card_number = card_number_list[1]
+        new_raw_card_number = [raw_card_number[0:6], raw_card_number[6:12], raw_card_number[12:]]
+        formatting_list = [new_raw_card_number[0]]
+        for digit in new_raw_card_number[1]:
             cyphered_digit = digit.replace(digit, "*")
             formatting_list.append(cyphered_digit)
-        formatting_list.append(new_unformatted_card_number[2])
+        formatting_list.append(new_raw_card_number[2])
         cyphered_card_number = "".join(formatting_list)
         return " ".join([cyphered_card_number[i:i+4] for i in range(0, len(cyphered_card_number), 4)])
+
+    def cypher_account_number(self):
+        raw_account_number = self.get_to().split(" ")[1]
+        account_number_tail = raw_account_number[-6:]
+        account_number_tail_list = [account_number_tail[:2], account_number_tail[2:]]
+        visible_list = []
+        for digit in account_number_tail_list[0]:
+            cyphered_digit = digit.replace(digit, "*")
+            visible_list.append(cyphered_digit)
+        visible_list.append(account_number_tail_list[1])
+        return "".join(visible_list)
 
 
 
 if __name__ == '__main__':
+    qqq = Operation()
+    qqq.to = "Счет 64686473678894779589"
+    print(qqq.cypher_account_number())
 
