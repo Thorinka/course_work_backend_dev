@@ -1,3 +1,6 @@
+from datetime import date
+
+
 class Operation:
     """
     Класс - Операция
@@ -8,8 +11,8 @@ class Operation:
     from_where - откуда совершена операция
     to - куда была совершена операция
     """
-    def __init__(self, date, state, amount, description, from_where, to):
-        self.date = date
+    def __init__(self, operation_date = None, state = None, amount = None, description = None, from_where = None, to = None):
+        self.operation_date = operation_date
         self.state = state
         self.amount = amount
         self.description = description
@@ -17,7 +20,7 @@ class Operation:
         self.to = to
 
     def __repr__(self):
-        return f"Operation(date = {self.date}, " \
+        return f"Operation(date = {self.operation_date}, " \
                f"state = {self.state}, " \
                f"amount = {self.amount}, " \
                f"description = {self.description}, " \
@@ -25,7 +28,7 @@ class Operation:
                f"to = {self.to}"
 
     def get_date(self):
-        return self.date
+        return self.operation_date
 
     def get_state(self):
         return self.state
@@ -42,4 +45,13 @@ class Operation:
     def get_to(self):
         return self.to
 
+    def convert_date(self):
+        date_list = self.get_date().split("T")
+        new_date = date.fromisoformat(date_list[0])
+        date_formatted = new_date.strftime("%d.%m.%Y")
+        return date_formatted
+
+
+
+if __name__ == '__main__':
 
