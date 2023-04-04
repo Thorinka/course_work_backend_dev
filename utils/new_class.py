@@ -68,30 +68,80 @@ class Operation:
 
     def cypher_card_number(self):
         card_number_list = self.get_from_where().split(" ")
-        raw_card_number = card_number_list[1]
-        new_raw_card_number = [raw_card_number[0:6], raw_card_number[6:12], raw_card_number[12:]]
-        formatting_list = [new_raw_card_number[0]]
-        for digit in new_raw_card_number[1]:
-            cyphered_digit = digit.replace(digit, "*")
-            formatting_list.append(cyphered_digit)
-        formatting_list.append(new_raw_card_number[2])
-        cyphered_card_number = "".join(formatting_list)
-        return " ".join([cyphered_card_number[i:i+4] for i in range(0, len(cyphered_card_number), 4)])
+        if "Счет" in card_number_list[0]:
+            raw_card_number = card_number_list[1]
+            account_number_tail = raw_card_number[-6:]
+            account_number_tail_list = [account_number_tail[:2], account_number_tail[2:]]
+            visible_list = []
+            for digit in account_number_tail_list[0]:
+                cyphered_digit = digit.replace(digit, "*")
+                visible_list.append(cyphered_digit)
+            visible_list.append(account_number_tail_list[1])
+            return card_number_list[0] + " " + "".join(visible_list)
+        else:
+            try:
+                raw_card_number = card_number_list[2]
+                new_raw_card_number = [raw_card_number[0:6], raw_card_number[6:12], raw_card_number[12:]]
+                formatting_list = [new_raw_card_number[0]]
+                for digit in new_raw_card_number[1]:
+                    cyphered_digit = digit.replace(digit, "*")
+                    formatting_list.append(cyphered_digit)
+                formatting_list.append(new_raw_card_number[2])
+                cyphered_card_number = "".join(formatting_list)
+                return card_number_list[0] + " " + card_number_list[1] + " " + " ".join(
+                    [cyphered_card_number[i:i + 4] for i in range(0, len(cyphered_card_number), 4)])
+            except IndexError:
+                raw_card_number = card_number_list[1]
+                new_raw_card_number = [raw_card_number[0:6], raw_card_number[6:12], raw_card_number[12:]]
+                formatting_list = [new_raw_card_number[0]]
+                for digit in new_raw_card_number[1]:
+                    cyphered_digit = digit.replace(digit, "*")
+                    formatting_list.append(cyphered_digit)
+                formatting_list.append(new_raw_card_number[2])
+                cyphered_card_number = "".join(formatting_list)
+                return card_number_list[0] + " " + " ".join(
+                    [cyphered_card_number[i:i + 4] for i in range(0, len(cyphered_card_number), 4)])
+
 
     def cypher_account_number(self):
-        raw_account_number = self.get_to().split(" ")[1]
-        account_number_tail = raw_account_number[-6:]
-        account_number_tail_list = [account_number_tail[:2], account_number_tail[2:]]
-        visible_list = []
-        for digit in account_number_tail_list[0]:
-            cyphered_digit = digit.replace(digit, "*")
-            visible_list.append(cyphered_digit)
-        visible_list.append(account_number_tail_list[1])
-        return "".join(visible_list)
+        account_number_list = self.get_to().split(" ")
+        if "Счет" in account_number_list[0]:
+            raw_card_number = account_number_list[1]
+            account_number_tail = raw_card_number[-6:]
+            account_number_tail_list = [account_number_tail[:2], account_number_tail[2:]]
+            visible_list = []
+            for digit in account_number_tail_list[0]:
+                cyphered_digit = digit.replace(digit, "*")
+                visible_list.append(cyphered_digit)
+            visible_list.append(account_number_tail_list[1])
+            return account_number_list[0] + " " + "".join(visible_list)
+        else:
+            try:
+                raw_card_number = account_number_list[2]
+                new_raw_card_number = [raw_card_number[0:6], raw_card_number[6:12], raw_card_number[12:]]
+                formatting_list = [new_raw_card_number[0]]
+                for digit in new_raw_card_number[1]:
+                    cyphered_digit = digit.replace(digit, "*")
+                    formatting_list.append(cyphered_digit)
+                formatting_list.append(new_raw_card_number[2])
+                cyphered_card_number = "".join(formatting_list)
+                return account_number_list[0] + " " + account_number_list[1] + " " + " ".join(
+                    [cyphered_card_number[i:i + 4] for i in range(0, len(cyphered_card_number), 4)])
+            except IndexError:
+                raw_card_number = account_number_list[1]
+                new_raw_card_number = [raw_card_number[0:6], raw_card_number[6:12], raw_card_number[12:]]
+                formatting_list = [new_raw_card_number[0]]
+                for digit in new_raw_card_number[1]:
+                    cyphered_digit = digit.replace(digit, "*")
+                    formatting_list.append(cyphered_digit)
+                formatting_list.append(new_raw_card_number[2])
+                cyphered_card_number = "".join(formatting_list)
+                return account_number_list[0] + " " + " ".join(
+                    [cyphered_card_number[i:i + 4] for i in range(0, len(cyphered_card_number), 4)])
 
 
 
 if __name__ == '__main__':
     qqq = Operation()
-    qqq.operation_date = "2019-07-13T18:51:29.313309"
-    print(qqq.take_date_not_str())
+    qqq.from_where = "Visa Classic 4195191172583802"
+    print(qqq.cypher_card_number())
