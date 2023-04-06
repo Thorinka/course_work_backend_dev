@@ -1,17 +1,10 @@
 import json
+import os
 import pathlib
 from utils.new_class import Operation
 
 
-def path(file):
-    """
-    Прописывает путь до файла
-    :param file: Имя файла
-    :return: Абсолютный путь
-    """
-    dir_path = pathlib.Path.cwd()
-    full_path = pathlib.Path(dir_path, "operation_files", file)
-    return full_path
+PATH_TO_FILE = os.path.join("..", "operation_files", "operations.json")
 
 
 def load_json_file(filename):
@@ -20,7 +13,7 @@ def load_json_file(filename):
     :param filename: имя файла
     :return: конвертированный файл (список словарей)
     """
-    with open(path(filename), "r", encoding="utf8") as json_file:
+    with open(PATH_TO_FILE, "r", encoding="utf8") as json_file:
         converted_file = json.load(json_file)
         return converted_file
 
