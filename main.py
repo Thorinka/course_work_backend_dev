@@ -4,6 +4,7 @@ from utils.funcs import load_operation, load_json_file
 import heapq
 
 PATH_TO_FILE = os.path.join("operation_files", "operations.json")
+
 def main():
     """
     Итерация по списку словарей из конвертированного файла JSON, фильтр по статусу EXECUTED, фильтр самых поздних
