@@ -170,5 +170,5 @@ class Operation:
 
 if __name__ == '__main__':
     qqq = Operation()
-    qqq.from_where = "Visa Platinum 1813166339376336"
-    print(qqq.cypher_card_number())
+    qqq.operation_date = "2019-08-26T10:50:58.294041"
+    print(qqq.take_date_not_str())
