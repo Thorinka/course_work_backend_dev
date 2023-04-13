@@ -25,6 +25,21 @@ def test_cypher_to():
 
 def test_cypher_card_number():
     test_object = Operation()
-    card_number_list = ["Master", "Card" "1596837868705199"]
-    assert test_object.cypher_card_number(card_number_list) == "Master Card 15** **** 6870 5199"
+    card_number_list = ["Master", "Card", "1596837868705199"]
+    assert test_object.cypher_card_number(card_number_list) == "Master Card 1596 83** **** 5199"
+
+def test_cypher_account_number():
+    test_object = Operation()
+    account_number_list = ["Счет", "64686473678894779589"]
+    assert test_object.cypher_account_number(account_number_list) == "Счет **9589"
+
+def test_get_id():
+    test_object = Operation()
+    test_object.operation_id = "441945886"
+    assert test_object.get_id() == "441945886"
+
+def test_get_state():
+    test_object = Operation()
+    test_object.state = "EXECUTED"
+    assert test_object.get_state() == "EXECUTED"
 

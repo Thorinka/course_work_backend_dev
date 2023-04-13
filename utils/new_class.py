@@ -56,54 +56,6 @@ class Operation:
     def get_currency(self):
         return self.currency
 
-    def set_id(self, new_operation_id):
-        if new_operation_id is False:
-            self.operation_id = None
-        else:
-            self.operation_id = new_operation_id
-
-    def set_date(self, new_operation_date):
-        if new_operation_date is False:
-            self.operation_date = None
-        else:
-            self.operation_date = new_operation_date
-
-    def set_state(self, new_state):
-        if new_state is False:
-            self.state = None
-        else:
-            self.state = new_state
-
-    def set_amount(self, new_amount):
-        if new_amount is False:
-            self.amount = None
-        else:
-            self.amount = new_amount
-
-    def set_description(self, new_description):
-        if new_description is False:
-            self.description = None
-        else:
-            self.description = new_description
-
-    def set_from_where(self, new_from):
-        if new_from is False:
-            self.from_where = None
-        else:
-            self.from_where = new_from
-
-    def set_to(self, new_to):
-        if new_to is False:
-            self.to = None
-        else:
-            self.to = new_to
-
-    def set_currency(self, new_currency):
-        if new_currency is False:
-            self.currency = None
-        else:
-            self.currency = new_currency
-
     def convert_date(self):
         date_list = self.get_date().split("T")
         new_date = date.fromisoformat(date_list[0])
@@ -169,6 +121,4 @@ class Operation:
 
 
 if __name__ == '__main__':
-    qqq = Operation()
-    qqq.operation_date = "2019-08-26T10:50:58.294041"
-    print(qqq.take_date_not_str())
+    pass

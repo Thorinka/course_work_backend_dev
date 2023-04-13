@@ -32,9 +32,3 @@ def load_operation(operation_):
                                   to=operation_["to"])
 
     return new_operation
-
-
-if __name__ == '__main__':
-    for operation in load_json_file(PATH_TO_FILE):
-        if operation:
-            print(type(load_operation(operation)))
