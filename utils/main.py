@@ -1,10 +1,15 @@
 from datetime import datetime
 from utils.funcs import load_operation, load_json_file
-from utils.new_class import Operation
 import heapq
 
 
 def main():
+    """
+    Итерация по списку словарей из конвертированного файла JSON, фильтр по статусу EXECUTED, фильтр самых поздних
+    операций, сортировка, вывод в зависимости от наличия элемента from_where
+
+    :return: Возвращает форматированный список пяти последних выполненных операциях
+    """
     executed_operations = []
     for operation in load_json_file():
         if operation:

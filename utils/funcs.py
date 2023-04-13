@@ -1,6 +1,5 @@
 import json
 import os
-import pathlib
 
 from utils.new_class import Operation
 
@@ -18,6 +17,11 @@ def load_json_file(filepath=PATH_TO_FILE):
 
 
 def load_operation(operation_):
+    """
+    Импортирует словарь из списка словарей в экземпляр класса Operation
+    :param operation_: элемент списка словарей
+    :return: Operation
+    """
     try:
         new_operation = Operation(operation_date=operation_["date"], state=operation_["state"],
                                   amount=operation_["operationAmount"]["amount"],
