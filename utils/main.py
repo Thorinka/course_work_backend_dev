@@ -6,10 +6,11 @@ import heapq
 
 def main():
     executed_operations = []
-    for operation in load_json_file("operations.json"):
-        new_operation = load_operation(operation)
-        if new_operation.get_state() == "EXECUTED":
-            executed_operations.append(new_operation)
+    for operation in load_json_file():
+        if operation:
+            new_operation = load_operation(operation)
+            if new_operation.get_state() == "EXECUTED":
+                executed_operations.append(new_operation)
     last_executed_operations_dates = heapq.nlargest(5, [i.take_date_not_str() for i in executed_operations])
     last_executed_operations = []
     for i in executed_operations:
