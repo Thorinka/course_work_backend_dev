@@ -1,7 +1,8 @@
+import os
 from datetime import datetime
 from utils.funcs import load_operation, load_json_file
 import heapq
-
+PATH_TO_FILE = os.path.join("operation_files", "operations.json")
 
 def main():
     """
@@ -11,7 +12,7 @@ def main():
     :return: Возвращает форматированный список пяти последних выполненных операциях
     """
     executed_operations = []
-    for operation in load_json_file():
+    for operation in load_json_file(PATH_TO_FILE):
         if operation:
             new_operation = load_operation(operation)
             if new_operation.get_state() == "EXECUTED":
