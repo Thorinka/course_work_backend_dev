@@ -6,7 +6,7 @@ import heapq
 
 def main():
     executed_operations = []
-    for operation in load_json_file("operations.json"):
+    for operation in load_json_file():
         if operation:
             new_operation = load_operation(operation)
             if new_operation.get_state() == "EXECUTED":

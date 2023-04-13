@@ -1,60 +1,40 @@
 import json
 import os
 import pathlib
-from utils.new_class import Operation
 
+from utils.new_class import Operation
 
 PATH_TO_FILE = os.path.join("..", "operation_files", "operations.json")
 
 
-def load_json_file(filename):
+def load_json_file(filepath=PATH_TO_FILE):
     """
     Читает и конвертирует json файл
-    :param filename: имя файла
     :return: конвертированный файл (список словарей)
     """
-    with open(PATH_TO_FILE, "r", encoding="utf8") as json_file:
+    with open(filepath, "r", encoding="utf8") as json_file:
         converted_file = json.load(json_file)
         return converted_file
 
 
-def load_operation(operation):
-    new_operation = Operation()
+def load_operation(operation_):
     try:
-        new_operation.set_id(operation["id"])
-    except KeyError:
-        new_operation.set_id(None)
-    try:
-        new_operation.set_date(operation["date"])
-    except KeyError:
-        new_operation.set_date(None)
-    try:
-        new_operation.set_state(operation["state"])
-    except KeyError:
-        new_operation.set_state(None)
-    try:
-        new_operation.set_amount(operation["operationAmount"]["amount"])
-    except KeyError:
-        new_operation.set_amount(None)
-    try:
-        new_operation.set_currency(operation["operationAmount"]["currency"]["name"])
-    except KeyError:
-        new_operation.set_currency(None)
-    try:
-        new_operation.set_description(operation["description"])
-    except KeyError:
-        new_operation.set_description(None)
-    try:
-        new_operation.set_from_where(operation["from"])
-    except KeyError:
-        new_operation.set_from_where(None)
-    try:
-        new_operation.set_to(operation["to"])
-    except KeyError:
-        new_operation.set_to(None)
+        new_operation = Operation(operation_date=operation_["date"], state=operation_["state"],
+                                  amount=operation_["operationAmount"]["amount"],
+                                  currency=operation_["operationAmount"]["currency"]["name"],
+                                  description=operation_["description"], from_where=operation_["from"],
+                                  to=operation_["to"])
+    except:
+        new_operation = Operation(operation_date=operation_["date"], state=operation_["state"],
+                                  amount=operation_["operationAmount"]["amount"],
+                                  currency=operation_["operationAmount"]["currency"]["name"],
+                                  description=operation_["description"], from_where=None,
+                                  to=operation_["to"])
+
     return new_operation
 
 
 if __name__ == '__main__':
-    for operation in load_json_file("operations.json"):
-        print(load_operation(operation))
+    for operation in load_json_file(PATH_TO_FILE):
+        if operation:
+            print(type(load_operation(operation)))
