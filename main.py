@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from utils.funcs import load_operation, load_json_file
 import heapq
+
 PATH_TO_FILE = os.path.join("operation_files", "operations.json")
 
 def main():
